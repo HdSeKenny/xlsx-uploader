@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "analyze_measure_plot",
+  "type": "object",
+  "description": "Used for measures for analyzing purpose.",
+  "properties": {
+    "header_literal": {
+      "type": "string",
+      "description": "Header literal to be displayed on the UI."
+    },
+    "friendly_name": {
+      "type": "string",
+      "description": "A string value used for displaying header on the ME UI."
+    },
+    "display_order": {
+      "type": "string",
+      "description": "The order in which this header has to be displayed on the UI."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "analyze_measure_plot"
+      ]
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "$ref": "sort" }
+        ]
+      }
+    },
+    "groupBy": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          },
+          "dbcolumn": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "if exists or not equal to null, add it to the groupby arraylist to the payload. Used for some groupby like test version"
+    },
+    "domainmeasure": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer"
+        }
+      }
+    },
+    "domainfield": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer"
+        },
+        "dbcolumn": {
+          "type": "string"
+        }
+      }
+    },
+    "header_id": {
+      "type": "integer",
+      "description": "The app managed unique id within the DomainHeaders entry."
+    },
+    "plot_config": {
+      "type": "object",
+      "properties": {
+        "max_domainmeasure": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            }
+          }
+        },
+        "max_domainfield": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "dbcolumn": {
+              "type": "string"
+            }
+          }
+        },
+        "min_domainmeasure": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            }
+          }
+        },
+        "min_domainfield": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "dbcolumn": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "auto": ["header_id"],
+  "unique": ["header_id"],
+  "required": ["display_order", "header_id", "type", "domainfield"]
+}

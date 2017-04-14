@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_toggleMax_parent",
+    "type": "object",
+    "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Literal to be displayed on ME UI."
+        },
+        "score_literal": {
+            "type": "string"
+            , "description": "Literal to be displayed on ME UI."
+        }
+        ,"max_literal": {
+            "type": "string"
+            , "description": "Literal to be displayed on ME UI."
+        }
+        ,"percent_literal": {
+            "type": "string"
+            , "description": "Literal to be displayed on ME UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "isr_toggleMax_parent"
+            ]
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        }
+        ,"header_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the header"
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "optional":["header_style"]
+    , "required": ["header_literal", "display_order" ,"header_id", "type"]
+}

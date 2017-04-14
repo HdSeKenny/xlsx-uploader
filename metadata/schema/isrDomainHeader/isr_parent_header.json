@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_parent_header",
+    "type": "object",
+    "properties": {
+        "friendly_name": {
+            "type": "string"
+            , "description": "Literal to be displayed on ME UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "isr_parent_header"
+            ]
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["friendly_name", "display_order" ,"header_id", "type"]
+}

@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "field_header",
+    "type": "object",
+    "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "field_header"
+            ]
+        } 
+        , "domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        , "actions": {
+            "type": "array"
+            , "items": {
+                "oneOf": [
+                    {"$ref":"sort"}
+                ]
+            }
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        }
+        , "mouseover_literal": {
+            "type": "string"
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "csv_header_literal":{
+            "type": "string"
+            , "description": "The header literal to be used for csv extracts."
+        }
+        , "excluded_orgtypes": {
+            "type": "array"
+            , "description": "A list of orgtypes where the header should not be displayed."
+            , "items": {
+                "type": "string"
+                , "description": "The 'type' value from the Orgtypes collection."
+            }
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["header_literal", "display_order" ,"header_id", "type"]
+}

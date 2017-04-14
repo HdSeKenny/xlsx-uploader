@@ -1,0 +1,125 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "roster_measure_toggleMax",
+    "type": "object",
+    "description": "Used for measures with mean operation with an option to have toggleMax option."
+    , "properties": {
+        "percent_header_literal": {
+            "type": "string"
+            , "description": "Literal to be displayed below the parent header on the UI for percent value."
+        }
+        , "max_header_literal":{
+            "type": "string"
+            , "description": "Literal to be displayed below the parent header on the UI for max value."
+        }
+        , "header_literal": {
+            "type": "string"
+            , "description": "Literal to be displayed below the parent header on the UI for mean value."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "actions": {
+            "type": "array",
+            "items":{
+                "oneOf": [
+                    {"$ref":"sort"},
+                    {"$ref":"univariate"},
+                    {"$ref":"bivariate"},
+                    {"$ref":"toggleMax"}
+                ]
+            }
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "roster_measure_toggleMax"
+            ]
+        }
+        , "domainmeasure": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+            }
+        }
+        , "domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+            , "max_domainmeasure": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+            }
+        }
+        , "max_domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        , "percent_domainmeasure": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+            }
+        }
+        , "percent_domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "csv_header_literal": {
+            "type": "string"
+            , "description": "The literal to be used for csv extracts."
+        }
+        , "append_literal": {
+            "type": "string"
+            , "description": "The literal to be used upon sorting."
+        }
+        , "percent_append_literal": {
+            "type": "string"
+            , "description": "The literal to be used for csv extracts."
+        }
+        , "max_append_literal": {
+            "type": "string"
+            , "description": "The literal to be used for csv extracts."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["display_order" ,"header_id", "type", "domainfield"]
+}

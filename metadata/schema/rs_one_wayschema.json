@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "rs_one_way",
+    "type": "object",
+    "properties": {
+        "rs_type": {
+            "type": "string",
+            "description": "report selector type."
+        , "enum": ["rs_one_way"]
+        },
+        "rs_properties": {
+            "type": "object"
+        , "description":"properties specific to this report selector type."
+        , "properties": {
+                "display_type": {
+                    "type": "string"
+                , "enum": ["check","radio"]
+                }
+            , "select_all_reset": {
+                    "type": "boolean"
+                , "enum": [true, false]
+                , "description": "For radio only reset is applicable and is controlled by this value. For check both select all and reset are applicable which are controlled by this value."
+                }
+            , "header": {
+                    "type": "string"
+                , "description": "A string value that gets rendered on the UI as bold header for this report selector. This is unique within a "
+                }
+            , "display_group_id": {
+                    "type": "integer"
+                , "description": "display group id that this report selector belongs to."
+                }
+            }
+        , "required": ["display_type", "select_all_reset", "header"]
+        , "unique": [["header","display_group_id"]]
+        },
+        "rs_fields":{
+            "type":"array",
+            "items": {
+                "type": "object"
+            , "properties": {
+                    "display_literal": {
+                        "type": "string"
+                    , "description": "Only required when a group of fields are to be represented by a single check or radio button."
+                    }
+                , "mouseover_literal": {
+                        "type": "string"
+                    , "description": "Only required when a custom mouseover_lietral should be used that overwrites the mouseover_lietral of the domainfields. If more than one domainfiled is added and mouseover_literal is left blank then the mouseover_literal from the DomainFields of the first field in this list will be used."
+                    }
+                , "display_order": {
+                        "type": "integer"
+                    , "description": "Display order on the UI."
+                    }
+                , "domainfield_ids": {
+                        "type": "array"
+                    , "items": "integer"
+                    , "description": "Array of domainfield identifiers."
+                    }
+                , "related_domainfield_ids": {
+                        "type": "array"
+                    , "items": "integer"
+                    , "description": "Array of related domainfield identifiers."
+                    }
+                , "default": {
+                        "type": "boolean"
+                    , "description": "Whether this field needs to be selected by default."
+                    }
+                }
+            , "required": ["display_order", "domainfield_ids"]
+            }
+        }
+    },
+    "required": ["rs_type", "rs_properties", "rs_fields"]
+, "auto": ["rs_type"]
+}

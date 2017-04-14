@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "feature_ViewUserActivity",
+    "type": "object",
+    "properties": {
+        "feature": {
+            "type": "string"
+            , "enum": ["ViewUserActivity"]
+        }
+     },
+    "required": ["feature"]
+}

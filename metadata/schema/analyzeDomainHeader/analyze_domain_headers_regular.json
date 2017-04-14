@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "analyze_domain_headers_regular",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["r"]
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "oneOf": [
+          { "$ref": "scope_header" },
+          { "$ref": "analyze_name_header" },
+          { "$ref": "analyze_info_header" },
+          { "$ref": "analyze_measure_simple" },
+          { "$ref": "analyze_measure_plot" }
+        ]
+      }
+    }
+  },
+  "required": ["type"]
+}

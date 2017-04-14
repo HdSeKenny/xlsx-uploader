@@ -1,0 +1,273 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "ReportTemplates",
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "description": "Uniquely identifying object for any particular ReportTemplate entry. This id is a combination of version and an integer value representing the ReportTemplate entry.",
+            "identifier": true,
+            "properties": {
+                "version": {
+                    "type": "integer"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "version",
+                "value"
+            ],
+            "auto": [
+                "version",
+                "value"
+            ]
+        },
+        "domain_value": {
+            "type": "integer",
+            "description": "the selected Domain for this reporttemplate entry."
+        },
+        "report_value": {
+            "type": "integer",
+            "description": "the selected Report for this reporttemplate entry"
+        },
+        "friendly_name": {
+            "type": "string",
+            "description": "Just an internal name that will be used when listing the template on the MetadataExplorer UI."
+        },
+        "table": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "the prefix of the table name"
+                },
+                "value": {
+                    "type": "integer",
+                    "description": "the tablereference value for this table."
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "report_types":{
+            "type":"array",
+            "description":"User ordered list of report types. A report can have different report types, it can have table, barchart, histogram and so on.",
+            "items":{
+            "type":"object",
+            "properties":{
+               "report_type":{
+                   "type": "string",
+                   "description": "it is the type of report, we can have table or different chart report types. A report type could only be used once in the report templates."
+                   , "enum": ["table","transpose","chart","roster","isr","summarize", "distribute", "crosstab", "splot", "usearch", "asearch", "cumulative"]
+                },
+                "small": {
+                    "type": "object"
+                    , "properties": {
+                        "tabs":{
+                            "type": "array"
+                            , "items": "integer"
+                            , "uniqueItems": true
+                            , "description": "Ordered list of tab _id.value from DomainTabs. The order in which they are added will determine the display order."
+                        }
+                        , "excluded_scope":{
+                            "type": "array"
+                            , "items": "string"
+                            , "uniqueItems": true
+                            , "description": "Optional. The dbcolumn value of the scope that has to excluded from the filter criteria when selecting fields."
+                        }
+                        , "default_measures_scope":{
+                            "type": "string"
+                            , "description": "Optional. The dbcolumn value of the scope whose values will contribute to the default scores to display by default. Should be set only if exclude_scope is set."
+                        }
+                        , "domainheader": {
+                            "type": "object"
+                            , "properties": {
+                                "value": {
+                                    "type": "integer"
+                                }
+                                , "type": {
+                                    "type": "string"
+                                    , "description": "maps to header.type value in DomainHeaders/RosterDomainHeaders/ISRDomainHeaders"
+                                }
+                            }
+                            , "auto": ["value", "type"]
+                        }
+                    }
+                    , "required": ["tabs", "domainheader"]
+                }
+                , "large": {
+                    "type": "object"
+                    , "properties": {
+                        "tabs":{
+                            "type": "array"
+                            , "items": "integer"
+                            , "uniqueItems": true
+                        }
+                        , "excluded_scope":{
+                            "type": "array"
+                            , "items": "string"
+                            , "uniqueItems": true
+                            , "description": "Optional. The dbcolumn value of the scope that has to excluded from the filter criteria when selecting fields."
+                        }
+                        , "default_measures_scope":{
+                            "type": "string"
+                            , "description": "Optional. The dbcolumn value of the scope whose values will contribute to the default scores to display by default. Should be set only if exclude_scope is set."
+                        }
+                        , "domainheader": {
+                            "type": "object"
+                            , "properties": {
+                                "value": {
+                                    "type": "integer"
+                                }
+                                , "type": {
+                                    "type": "string"
+                                    , "description": "maps to header.type value in DomainHeaders/RosterDomainHeaders/ISRDomainHeaders"
+                                }
+                            }
+                            , "auto": ["value", "type"]
+                        }
+                    }
+                    , "required": ["tabs", "domainheader"]
+                }
+                , "medium": {
+                    "type": "object"
+                    , "properties": {
+                        "tabs":{
+                            "type": "array"
+                            , "items": "integer"
+                            , "uniqueItems": true
+                        }
+                        , "excluded_scope":{
+                            "type": "array"
+                            , "items": "string"
+                            , "uniqueItems": true
+                            , "description": "Optional. The dbcolumn value of the scope that has to excluded from the filter criteria when selecting fields."
+                        }
+                        , "default_measures_scope":{
+                            "type": "string"
+                            , "description": "Optional. The dbcolumn value of the scope whose values will contribute to the default scores to display by default. Should be set only if exclude_scope is set."
+                        }
+                        , "domainheader": {
+                            "type": "object"
+                            , "properties": {
+                                "value": {
+                                    "type": "integer"
+                                }
+                                , "type": {
+                                    "type": "string"
+                                    , "description": "maps to header.type value in DomainHeaders/RosterDomainHeaders/ISRDomainHeaders"
+                                }
+                            }
+                            , "auto": ["value", "type"]
+                        }
+                    }
+                    , "required": ["tabs", "domainheader"]
+                }
+                , "download_options": {
+                    "type": "array"
+                    , "description": "Configuration to enable pdf and csv download options by report type on the large form factors."
+                    , "enum": ["pdf","csv"]
+                }
+                , "scope_identifiers": {
+                    "type": "array"
+                    , "items": "string"
+                    , "description": "Ordered list of scopes. These scopes will in the group by or filtering in the query, it will be the dbcolumn attribute value."
+                    , "uniqueitems": true
+                }
+                , "additional_identifiers": {
+                    "type": "array"
+                    , "description": "Ordered list of column names. non-scope dbcolumns that need to be added by default to the query for grouping the data."
+                    , "items": "string"
+                    , "uniqueitems": true
+                }
+                , "system_sort": {
+                    "type": "array"
+                    , "items": {
+                        "type": "object"
+                        , "properties": {
+                            "dbcolumn": {
+                                "type": "string"
+                            }
+                            , "order":{
+                                "type": "string"
+                                , "enum": ["asc", "desc"]
+                            }
+                        }
+                    }
+                    , "description": "List of columns and their sort order that would be applied by the api after either the default_sort or user sort preferences."
+                }
+                , "default_sort": {
+                    "type": "array"
+                    , "items": {
+                        "type": "object"
+                        , "properties": {
+                            "dbcolumn": {
+                                "type": "string"
+                            }
+                            , "order":{
+                                "type": "string"
+                                , "enum": ["asc", "desc"]
+                            }
+                        }
+                    }
+                    , "description": "List of columns and their sort order that would be applied in the absence of user sort preferences."
+                }
+                , "scope_singleselcted": {
+                    "type": "array"
+                    , "items": "string"
+                    , "description": "Ordered list of scopes. The value will be the dbcolumn attribute value. Only show the report type if the listed scope are single selected."
+                    , "uniqueitems": true
+                }
+                , "footnotes": {
+                    "type": "array"
+                    , "items":{
+                            "type":"integer"
+                            , "description": "List of footnote _id.value."
+                            }
+                    , "uniqueitems": true
+                }
+               , "toggleN": {
+                    "type": "boolean"
+                    ,"descripton": "used to control default toggle N, if true, the toggle N will be default. Otherwise, will not be default."
+                }
+                , "toggleMax": {
+                    "type": "boolean"
+                    ,"descripton": "used to control default toggle Max, if true, the toggle Max will be default. Otherwise, will not be default."
+                }
+            }
+            , "unique": ["report_type"]
+            , "required": ["report_type"]
+        }
+     }
+
+    },
+    "required": [
+        "_id",
+        "domain_value",
+        "report_value",
+        "friendly_name",
+        "table"
+    ],
+    "unique": [
+        "_id",
+        [
+            "domain_value",
+            "report_value"
+        ],
+        [
+            "friendly_name",
+            "domain_value",
+            "report_value"
+        ],
+        [
+            "friendly_name",
+            "domain_value"
+        ]
+    ],
+    "auto": [
+        "_id"
+    ]
+}

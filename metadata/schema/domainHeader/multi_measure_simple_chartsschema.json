@@ -1,0 +1,93 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "multi_measure_simple_charts",
+    "type": "object",
+    "description": "Used for measures with simple options of sort and graph."
+    , "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI."
+        }
+        , "friendly_name":{
+            "type":"string",
+            "description":"A string value used for displaying header on the ME UI."
+        }
+        , "anchor":{
+            "type":"boolean"
+            ,"description": "If true, will be used for filtering out the extra rows that shared the same domainfields"
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI. This display order is hierarchical in nature."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "multi_measure_simple_charts"
+            ]
+        }
+        , "chart_config": {
+            "type": "object"
+            , "properties": {
+                    "usage": {
+                        "type": "integer"
+                        , "enum": [1,2,3,4]
+                        , "description": "1- measure used for labelling the chart. 2- measure used for plotting the chart. 3- measure used to get the minimum x-axis value. 4- measure used to get the maximum x-axis value."
+                    }
+                    , "plot_color": {
+                        "type": "string"
+                        , "description": "if the usage is 2, then the plot_color should be specified as hexcode."
+                    }
+                    , "orient": {
+                        "type": "integer"
+                        , "enum": [0,1]
+                        , "description": "Used for centered aligned bar charts. 0- chart default. 1- left orient."
+                    }
+            }
+        }
+        , "entries": {
+            "type": "array"
+            , "items": {
+                "type": "object"
+                , "properties": {
+                    "domainmeasure": {
+                        "type": "object"
+                        , "properties": {
+                            "value": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                    , "domainfield": {
+                        "type": "object"
+                        , "properties": {
+                            "value": {
+                                "type": "integer"
+                            }
+                            , "dbcolumn": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                    , "row_id": {
+                        "type": "integer"
+                    }
+                }
+                , "required": ["dmainmeasure", "domainfield", "row_id"]
+                , "unique": ["row_id"]
+            }
+            , "uniqueItems": true
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["display_order" ,"header_id", "type"]
+}

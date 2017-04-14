@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "action_role",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+            , "enum": ["orgtypes"]
+        }
+        , "value": {
+            "type": "array"
+            , "description": "A list of the type value of selected orgtypes, help to determine the user account type that is allowed to be added"
+            , "items": {
+                "type": "string"
+                , "description": "The type value of selected orgtypes"
+            }
+        }
+     },
+    "required": ["name"]
+}

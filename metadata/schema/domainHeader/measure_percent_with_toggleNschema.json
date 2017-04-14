@@ -1,0 +1,97 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "measure_percent_with_toggleN",
+    "type": "object",
+    "description": "Used for measures with percent operation with an option to have toggleN option."
+    , "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Sub header literal to be displayed below the parent header on the UI for percent value."
+        }
+        , "n_header_literal": {
+            "type": "string"
+            , "description": "Sub header literal to be displayed below the parent header on the UI for n value."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "actions": {
+            "type": "array",
+            "items":{
+                "oneOf": [
+                    "sort"
+                    , "graph"
+                    , "toggleN"
+                ]
+            }
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "measure_percent_with_toggleN"
+            ]
+        }
+        , "domainmeasure": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+            }
+        }
+        , "domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        , "n_domainmeasure": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+            }
+        }
+        , "n_domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "append_literal": {
+            "type": "string"
+            , "description": "The literal to be used for appending to mouseover/csv literal for the header."
+        }
+        , "n_append_literal": {
+            "type": "string"
+            , "description": "The literal to be used for appending for n column."
+        }
+        , "csv_header_literal": {
+            "type": "string"
+            , "description": "The literal to be used for csv extracts for percent columns."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["display_order" ,"header_id", "type", "domainfield"]
+}

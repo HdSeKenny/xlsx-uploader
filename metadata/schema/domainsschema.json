@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Domains",
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "identifier": true,
+            "description": "Uniquely identifying object for any domain. This id is a combination of version and an integer value representing the domain.",
+            "properties": {
+                "version": {
+                    "type": "integer"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "version",
+                "value"
+            ],
+            "auto": [
+                "version",
+                "value"
+            ]
+        },
+        "display_literal": {
+            "type": "string",
+            "description": "A string value used for displaying the domain on the UI."
+        },
+        "reports": {
+            "type": "array",
+            "description": "A list of reports that this domain/program has access to.",
+            "required": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "integer",
+                        "description": "An unique integer value representing the report."
+                    },
+                    "report_type": {
+                        "type": "string",
+                        "description": "A string value that defines the type of the report. Possible values are 'summary', 'roster', 'lroster', 'chart', etc."
+                    },
+                    "display_order": {
+                        "type": "order",
+                        "description": "An integer value that defines the display order of the reports on the UI."
+                    }
+                },
+                "required": [
+                    "value",
+                    "report_type",
+                    "display_order"
+                ],
+                "auto": [
+                    "value",
+                    "report_type",
+                    "display_order"
+                ]
+            }
+        },
+        "display_order": {
+            "type": "order",
+            "description": "An integer value that defines the display order of the domains in the UI."
+        },
+        "active": {
+            "type": "boolean",
+            "description": "A boolean value that controls the display of domain on the UI."
+        },
+        "scope": {
+            "type": "string",
+            "default": "p",
+            "description": "The scope id of the domains. This is by default p for domains."
+        },
+        "icon_filename": {
+            "type": "string",
+            "description": "This is an optional field. If set, will load this image to display on the UI."
+        }
+    },
+    "required": [
+        "_id",
+        "display_literal",
+        "reports",
+        "display_order",
+        "active",
+        "scope"
+    ],
+    "unique": [
+        "_id",
+        "display_order"
+    ],
+    "auto": [
+        "_id",
+        "display_order",
+        "scope"
+    ]
+}

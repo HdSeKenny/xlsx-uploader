@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "parent_header",
+    "type": "object",
+    "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI."
+        }
+        , "friendly_name":{
+            "type":"string",
+            "description":"A string value used for displaying header on the ME UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "parent_header"
+            ]
+        }
+        , "actions": {
+            "type": "array"
+            , "items": {
+                "oneOf": [
+                    "toggleShow"
+                ]
+            }          
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["header_literal", "display_order" ,"header_id", "type"]
+}

@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_scope_header",
+    "type": "object",
+    "properties": {
+        "friendly_name": {
+            "type": "string"
+            , "description": "literal to be displayed on the ME UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "isr_scope_header"
+            ]
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "scope": {
+            "type": "object"
+            , "properties": {
+                "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        ,"value_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the value"
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "optional":["value_style"]
+    , "required": ["friendly_name", "display_order" ,"header_id", "type", "scope_list"]
+}

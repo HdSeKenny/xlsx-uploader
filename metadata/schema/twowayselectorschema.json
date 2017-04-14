@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "selector_two_way",
+    "type": "object",
+    "description": "two_way selector schema",
+    "properties": {
+        "type": {
+            "type": "string",
+            "enum": [
+                "two_way"
+            ],
+            "description": "the value of this property should always be two_way."
+        },
+        "selectors": {
+            "type": "array",
+            "description": "only two entries allowed in the array.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "integer"
+                    },
+                    "scope": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1
+                    },
+                    "dbcolumn": {
+                        "type": "string"
+                    },
+                    "axis": {
+                        "type": "string",
+                        "description": "list of enum values that could be assigned to this property.",
+                        "enum": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                },
+                "required": [
+                    "value",
+                    "axis",
+                    "scope",
+                    "dbcolumn"
+                ],
+                "auto": [
+                    "value",
+                    "scope",
+                    "dbcolumn"
+                ]
+            }
+        }
+    },
+    "required": [
+        "type",
+        "selectors"
+    ]
+}

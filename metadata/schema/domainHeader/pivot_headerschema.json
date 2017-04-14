@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "pivot_header",
+    "type": "object",
+    "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI for scope columns that added after transpose ."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "pivot_header"
+            ]
+        }
+        , "mouseover_literal": {
+            "type": "string"
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "transpose_column": {
+            "type": "string"
+            , "description":  "The transpose column value associated with this header."
+        }
+        , "csv_header_literal":{
+            "type": "string"
+            , "description": "The header literal to be used for csv extracts."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["header_literal", "display_order" ,"header_id", "type", "scope"]
+}

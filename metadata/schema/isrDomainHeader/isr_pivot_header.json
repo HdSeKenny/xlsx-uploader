@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_pivot_header",
+    "type": "object",
+    "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI for scope columns that added after transpose ."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "isr_pivot_header"
+            ]
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "transpose_column": {
+            "type": "string"
+            , "description":  "The transpose column value associated with this header."
+        }
+        , "header_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the header"
+        }
+        , "value_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the value"
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["header_literal", "display_order" ,"header_id", "type", "transpose_column"]
+}

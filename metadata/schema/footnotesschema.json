@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "Footnotes",
+  "description": "Create dynamic footnotes based on domains",
+  "properties": {
+    "_id": {
+      "type": "object",
+      "description": "Uniquely identifying object for any particular Footnote entry. This id is a combination of version and an integer value representing the Footnote entry",
+      "identifier": true,
+      "properties": {
+        "version": {
+          "type": "integer"
+        },
+        "value": {
+          "type": "integer"
+        }
+      },
+      "required": [
+          "version",
+          "value"
+      ],
+      "auto": [
+          "version",
+          "value"
+      ]
+    },
+    "domain_value": {
+      "type": "integer",
+      "description": "selected domain"
+    },
+    "display_order": {
+        "type": "integer"
+    },
+    "display_literal": {
+      "type": "string",
+      "description": "actual footnote literal to display"
+    },
+    "friendly_name": {
+      "type": "string",
+      "description": "A string value used for displaying on the MetadataExplorer UI."
+    },
+    "scl": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "sc": {
+                "type": "object"
+                ,"me_display_literal": "scope_combination"
+                ,"unique": true
+                ,"description": " Each property will be from scope.dbcolumn as key, and corresponding scope.dbvalues.dbvalue as value.  All the scopes in this list will be combined using the logical operator AND to determine if a field is applicable for a particular scope combination."
+                }
+        },
+        "required": ["sc"],
+        "unique": ["sc"]
+      },
+      "description": "List of scope combinations. Each combination in the list will be combined using the logical operator OR to determine if a field is applicable for a particular scope combination.",
+      "me_display_literal": "scope_combination_list"
+    },
+    "csc":{
+            "type":"object"
+            ,"me_display_literal":"chronological_scope_combination"
+            ,"description":"list of chronological scopes added as properties with scope.dbcolumn as the key with optional lower and upper properties whose values are set from scope.dbvalues.dbvalue. The scope dbcolumn used here  should have csc equals to true in scope metadata. Lower and upper bound are used to capture the scopes range for the particular Object."
+    },
+    "sites": {
+        "type": "object"
+        , "description": "A set of fields that define access criteria for the reports."
+        , "properties" : {
+            "public": {
+                "type": "boolean"
+                , "description": "A boolean value that controls the access of this report on public site."
+            }
+            , "secure": {
+                "type": "boolean"
+                , "description": "A boolean value that controls the access of this report on secure site."
+            }
+        }
+        , "required": ["public", "secure"]
+    }
+  },
+  "required": ["_id", "display_order", "display_literal"],
+  "unique": ["_id", "display_order", "friendly_name"],
+  "auto": ["_id", "display_order"]
+}

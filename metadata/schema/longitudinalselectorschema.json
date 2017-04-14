@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "selector_longitudinal",
+    "type": "object",
+    "description": "longitudinal selector schema",
+    "properties": {
+        "type": {
+            "type": "string",
+            "enum": [
+                "longitudinal"
+            ],
+            "description": "the value of this property should always be longitudinal."
+        },
+        "selectors": {
+            "type": "array",
+            "description": "only two entries allowed in the array.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "integer"
+                    },
+                    "scope": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1
+                    },
+                    "dbcolumn": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value",
+                    "scope",
+                    "dbcolumn"
+                ],
+                "auto": [
+                    "value",
+                    "scope",
+                    "dbcolumn"
+                ]
+            }
+        }
+    },
+    "required": [
+        "type",
+        "selectors"
+    ]
+}

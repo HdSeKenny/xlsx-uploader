@@ -1,0 +1,137 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "DomainMeasures",
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "description": "Uniquely identifying object for any DomainMeasures entry. This id is a combination of version and an integer value representing the entry.",
+            "identifier": true,
+            "properties": {
+                "version": {
+                    "type": "integer"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "version",
+                "value"
+            ],
+            "auto": [
+                "version",
+                "value"
+            ]
+        },
+        "summary": {
+            "type": "boolean",
+            "description":"If true, this is a DomainMeasures belong to Summary Report, else it belongs to Roster report"
+        },
+        "domain_value": {
+            "type": "integer",
+            "description": "the selected Domain for this DomainField."
+        },
+        "friendly_name": {
+            "type": "string",
+            "description": "The unique friendly_name to be used for display puropses in the MetadataExplorer app."
+        },
+        "recode_criteria":{"$ref": "recode_criteria"}, 
+        "valid_criteria":{"$ref": "valid_criteria"},
+        "mask_criteria": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "description": "The criteria to be used by the api (passed by the client) to mask any particular value of a matching criteria. This masking should be applied to all the measures with operations that use this measure as the denominator or numerator.",
+                "properties": {
+                    "mask_criteria_id": {
+                        "type": "integer",
+                        "description": "App managed unique id that other areas of this object use."
+                    },
+                    "domainfield": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "integer"
+                            },
+                            "dbcolumn": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "DomainField object with value and dbcolumn attributes for which the mask criteria is being described."
+                    },
+                    "condition": {
+                        "type": "object",
+                        "properties": {
+                            "operation": {
+                                "type": "string",
+                                "description": "Condition operator to be used to determine if a value has to be masked.",
+                                "enum": [
+                                    "lte",
+                                    "lt",
+                                    "gt",
+                                    "gte",
+                                    "eq"
+                                ]
+                            },
+                            "value": {
+                                "type": "number",
+                                "description": "The reference value to be checked against. Could be integer or float."
+                            }
+                        }
+                    },
+                    "display_value": {
+                        "type": "string",
+                        "description": "The display value to be used instead of the original value."
+                    }
+                },
+                "unique": [
+                    "domainfield",
+                    "mask_criteria_id"
+                ],
+                "required": [
+                    "domainfield",
+                    "condition",
+                    "display_value",
+                    "mask_criteria_id"
+                ],
+                "auto": [
+                    "mask_criteria_id"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "measures": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "oneOf": [
+                    {
+                        "$ref": "with_denominator"
+                    },
+                    {
+                        "$ref": "without_denominator"
+                    },
+                    {
+                        "$ref": "roster_score"
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "_id",
+        "domain_value",
+        "friendly_name"
+    ],
+    "auto": [
+        "_id"
+    ],
+    "unique": [
+        "_id",
+        [
+            "domain_value",
+            "friendly_name"
+        ]
+    ]
+}

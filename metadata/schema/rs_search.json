@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "rs_search",
+    "type": "object",
+    "properties": {
+        "rs_type": {
+            "type": "string",
+            "description": "report selector type.",
+            "enum": ["rs_search"]
+        },
+        "rs_properties": {
+            "type": "object",
+            "description": "properties specific to this report selector type.",
+            "properties": {
+                "display_group_id": {
+                    "type": "integer",
+                    "description": "display group id that this report selector belongs to. Typically not used with filter type selectors."
+                },
+                "header": {
+                    "type": "string",
+                    "description": "A string value that gets rendered on the UI as bold header for this report selector."
+                }
+            },
+            "required": ["header"],
+            "unique": [["header",
+            "display_group_id"]]
+        },
+        "rs_fields": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "domainfield_ids": {
+                        "type": "array",
+                        "items": "integer",
+                        "description": "Array of domainfield identifiers. But for filter type selectors only one field is allowed to be represented on the UI under a label."
+                    },
+                    "display_literal": {
+                        "type": "string",
+                        "description": "Display_literal on the Search box."
+                    },
+                    "control": {
+                        "type": "object",
+                        "description": "The action for the domainfields",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": ["contains","numeric","check","radio","startswith"]
+                            },
+                            "values": {
+                                "type": "array",
+                                "items": "object",
+                                "properties":{
+                                    "operator":"string",
+                                    "display_literal":"string",
+                                    "value":"string"
+                                 
+                                }
+                            }
+                        },
+                    "optional": ["values"]
+                    },
+                    "display_order": {
+                        "type": "integer",
+                        "description": "The order in which the fields will be displayed."
+                    }
+                },
+                "required": ["display_order",
+                "domainfield_ids"]
+            }
+        }
+    },
+    "required": ["rs_type",
+    "rs_properties",
+    "rs_fields"],
+    "auto": ["rs_type"]
+}

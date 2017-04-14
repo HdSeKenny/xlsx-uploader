@@ -1,0 +1,161 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "rs_two_way_split",
+    "type": "object",
+    "properties": {
+        "rs_type": {
+            "type": "string",
+            "description": "report selector type."
+        , "enum": ["rs_two_way_split"]
+        },
+        "rs_properties": {
+            "type": "object"
+        , "description":"properties specific to this report selector type."
+        , "properties": {
+                "row_display_type": {
+                    "type": "string"
+                , "enum": ["check","radio"]
+                }
+            , "col_display_type": {
+                    "type": "string"
+                , "enum": ["check","radio"]
+                }
+            , "row_select_all_reset": {
+                    "type": "boolean"
+                , "enum": [true, false]
+                , "description": "Applicable only if the row_display_type is check."
+                }
+            , "col_select_all_reset": {
+                    "type": "boolean"
+                , "enum": [true, false]
+                , "description": "Applicable only if the col_display_type is check."
+                }
+            , "row_header_groups": {
+                    "type": "array"
+                , "items": {
+                        "type":"object"
+                    , "properties": {
+                            "row_group_id" : {
+                                "type": "string"
+                            , "description": "Unique app managed non empty integer value."
+                            }
+                        , "display_order": {
+                                "type": "integer"
+                            , "description": "Value representing the order of display of these groups on the UI."
+                            }
+                        , "display_literal": {
+                                "type": "string"
+                            , "description": "The header to be used for each group."
+                            }
+                        }
+                    , "required": ["row_group_id","display_order","display_literal"]
+                    , "auto": ["row_group_id"]
+                    , "unique": ["row_group_id","display_order","display_literal"]
+                    }
+                }
+            , "row_headers": {
+                    "type": "array"
+                , "items":{
+                        "type": "object"
+                    , "properties": {
+                            "id": {
+                                "type": "integer"
+                            , "description": "Unique app managed non empty integer value."
+                            }
+                        ,"friendly_name":{
+                              "type":"string"
+                            , "description": "friendly name displayed on ME UI."
+                            }
+                        , "display_order": {
+                                "type": "integer"
+                            , "description": "Value representing the order of display on the UI."
+                            }
+                        , "display_literal": {
+                                "type": "string",
+                                "description": "Display literal of the header."
+                            }
+                        , "row_group_id": {
+                                "type": "integer"
+                            , "description": "Id of the row_header_groups entry that this particular row_header belongs to."
+                            }
+                        }
+                    , "required": ["id","display_order","display_literal","row_group_id"]
+                    , "auto": ["id"]
+                    , "unique": ["id","display_order",["row_group_id", "display_literal"]]
+                    }
+                }
+            , "header": {
+                    "type": "string"
+                , "description": "The header to be displayed for the column selectors."
+                }
+            , "col_headers": {
+                    "type": "array"
+                , "items":{
+                        "type": "object"
+                    , "properties": {
+                            "id": {
+                                "type": "integer"
+                            , "description": "Unique app managed non empty integer value."
+                            }
+                        , "display_order": {
+                                "type": "integer"
+                            , "description": "Value representing the order of display on the UI."
+                            }
+                        , "display_literal": {
+                                "type": "string",
+                                "description": "Display literal of the header."
+                            }
+                        }
+                    , "required": ["id","display_order","display_literal"]
+                    , "auto": ["id"]
+                    , "unique": ["id","display_order","display_literal"]
+                    }
+                }
+            , "display_group_id": {
+                    "type": "integer"
+                , "description": "display group id that this report selector belongs to."
+                }
+            },
+            "required": ["display_type", "row_select_all_reset","col_select_all_reset", "col_header"]
+        , "unique": [["header","display_group_id"]]
+        },
+        "rs_fields":{
+            "type":"array",
+            "items": {
+                "type": "object"
+            , "properties": {
+                    "col_header_id": {
+                        "type": "integer"
+                    , "description": "Id of the column header to which this field or group of fields belong to."
+                    }
+                , "row_header_id": {
+                        "type": "integer"
+                    , "description": "Id of the row header to which this field or group of fields belong to."
+                    }
+                , "mouseover_literal": {
+                        "type": "string"
+                    , "description": "Only required when a custom mouseover_lietral should be used that overwrites the mouseover_lietral of the domainfields. If more than one domainfiled is added and mouseover_literal is left blank then the mouseover_literal from the DomainFields of the first field in this list will be used."
+                    }
+                , "domainfield_ids": {
+                        "type": "array"
+                    , "items": "integer"
+                    , "description": "Array of domainfield identifiers. Multiple values are possible."
+                    }
+                , "related_domainfield_ids": {
+                        "type": "array"
+                    , "items": "integer"
+                    , "description": "Array of related domainfield identifiers."
+                    }
+                , "default": {
+                        "type": "boolean"
+                    , "description": "Whether this field needs to be selected by default."
+                    }
+                }
+            , "required": ["col_header_id", "row_header_id", "domainfield_ids"]
+            , "unique":[["domainfield_ids","col_header_id","row_header_id"]]
+            }
+        }
+    },
+    "required": ["rs_type", "rs_properties", "rs_fields"]
+, "auto": ["rs_type"]
+}

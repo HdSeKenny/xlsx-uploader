@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "without_denominator",
+    "type": "object",
+    "properties": {
+        "domainfield": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "integer"
+                },
+                "dbcolumn": {
+                    "type": "string"
+                }
+            },
+            "description": "DomainField object with value and dbcolumn attributes for which the operation is being described."
+        },
+        "operation": {
+            "type": "string",
+            "enum": [
+                "sum",
+                "count",
+                "min",
+                "max"
+            ],
+            "description": "user can select what is the operation applicable for the domain field."
+        },
+        "format": {
+            "type": "string",
+            "oneOf": [
+                {
+                    "$ref": "format_whole.value"
+                },
+                {
+                    "$ref": "format_float_1_decimal.value"
+                },
+                {
+                    "$ref": "format_float_2_decimal.value"
+                }
+            ]
+        },
+        "public":{
+            "type": "object"
+            , "properties": {
+                "mask_criteria_id": {
+                    "type": "integer"
+                    , "description": "mask_criteria_id from the entry in the mask_criteria"
+                }
+            }
+        },
+        "secure":{
+            "type": "object"
+            , "properties": {
+                "mask_criteria_id": {
+                    "type": "integer"
+                    , "description": "mask_criteria_id from the entry in the mask_criteria"
+                }
+            }
+        }
+    },
+    "unique": [
+        "domainfield"
+    ],
+    "required": [
+        "domainfield",
+        "operation",
+        "format"
+    ]
+}

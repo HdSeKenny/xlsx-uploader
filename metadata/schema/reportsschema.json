@@ -1,0 +1,227 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Reports",
+    "type": "object",
+    "description": "Reports Schema",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "identifier": true,
+            "description": "Uniquely identifying object for any report. This id is a combination of version and an integer value representing the report.",
+            "properties": {
+                "version": {
+                    "type": "integer"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "version",
+                "value"
+            ],
+            "auto": [
+                "version",
+                "value"
+            ]
+        },
+        "friendly_name": {
+            "type": "string",
+            "description": "A string value used as an identifier."
+        },
+        "display_literal": {
+            "type": "string",
+            "description": "A string value used for displaying the report on the UI."
+        },
+        "description": {
+            "type": "string",
+            "description": "A string value used for describing the report."
+        },
+        "summary": {
+            "type": "boolean",
+            "description": "If true, lower level users will be able to look at parent level reports. Else, lower level users will not be able to access parent level reports."
+        },
+        "active": {
+            "type": "object",
+            "description": "A boolean value that controls the display of report on the UI for each form factor.",
+            "properties": {
+                "small": {
+                    "type": "boolean"
+                },
+                "medium": {
+                    "type": "boolean"
+                },
+                "large": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "report_type": {
+            "type": "string",
+            "description": "A string value that defines the type of the report. This is used only for the sake of making the values human readable. Possible values are 'summary', 'studentsearch', 'roster', 'individual', 'lroster', 'chart', etc.",
+            "enum": [
+                "summary",
+                "roster",
+                "lroster",
+                "analyze",
+                "search",
+                "cumulative"
+            ]
+        },
+        "scope_relation": {
+            "type": "string"
+            , "enum":["and","or"]
+            , "description": "Used to indicate whether to use relation 'AND' or 'OR' for report selector. Default is relation 'OR'."
+        },
+        "sites": {
+            "type": "object",
+            "description": "A set of fields that define access criteria for the reports.",
+            "properties": {
+                "public": {
+                    "type": "boolean",
+                    "description": "A boolean value that controls the access of this report on public site."
+                },
+                "secure": {
+                    "type": "boolean",
+                    "description": "A boolean value that controls the access of this report on secure site."
+                }
+            },
+            "required": [
+                "public",
+                "secure"
+            ]
+        },
+        "selectable_orgtypes": {
+            "type": "array",
+            "items": {
+                "$ref": "Orgtypes"
+            },
+            "description": "A list of orgtypes that could be selected for this report. If, the value is null then all org types would be selectable."
+        },
+        "linked_reports": {
+                    "type": "array"
+                    , "description": "A list of linked report that could be drilled down for this report. If the value is null then none of reports can be drilled."
+                    , "items": {
+                        "type": "integer"
+                        , "description": "The _id.value of the linked report."
+                    }
+        },
+        "basic_selections": {
+            "type": "array",
+            "description": "A list of selectors for this report.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "scopes": {
+                        "type": "array",
+                        "description": "A list of scopes related to current selector. Used for retrieving the selector hierarchy easily.",
+                        "items": "string"
+                    },
+                    "dbcolumns": {
+                        "type": "array",
+                        "description": "A list of dbcolumns related to the current selector. Used for retrieving the selector hierarchy easily.",
+                        "items": "string"
+                    },
+                    "small": {
+                        "type": "object",
+                        "description": "scope configuration for small form factors. The schema's for the selectors are defined above.",
+                        "oneOf": [
+                            {
+                                "$ref": "selector_simple"
+                            },
+                            {
+                                "$ref": "selector_two_way"
+                            },
+                            {
+                                "$ref": "selector_longitudinal"
+                            },
+                            {
+                                "$ref": "selector_split"
+                            }
+                        ]
+                    },
+                    "medium": {
+                        "type": "object",
+                        "description": "scope configuration for medium form factors. The schema's for the selectors are defined above.",
+                        "oneOf": [
+                            {
+                                "$ref": "selector_simple"
+                            },
+                            {
+                                "$ref": "selector_two_way"
+                            },
+                            {
+                                "$ref": "selector_longitudinal"
+                            },
+                            {
+                                "$ref": "selector_split"
+                            }
+                        ]
+                    },
+                    "large": {
+                        "type": "object",
+                        "description": "scope configuration for large form factors. The schema's for the selectors are defined above.",
+                        "oneOf": [
+                            {
+                                "$ref": "selector_simple"
+                            },
+                            {
+                                "$ref": "selector_two_way"
+                            },
+                            {
+                                "$ref": "selector_longitudinal"
+                            },
+                            {
+                                "$ref": "selector_split"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "scopes",
+                    "dbcolumns",
+                    "small",
+                    "medium",
+                    "large"
+                ]
+            }
+        },
+        "scl": {
+              "type": "array",
+              "items": {
+                  "type": "object",
+                  "properties": {
+                      "sc": {
+                      "type": "object"
+                      ,"me_display_literal": "scope_combination"
+                      ,"unique": true
+                      ,"description": " Each property will be from scope.dbcolumn as key, and corresponding scope.dbvalues.dbvalue as value.  All the scopes in this list will be combined using the logical operator AND to determine if a field is applicable for a particular scope combination."
+                      }
+                  },
+                  "required": ["sc"],
+                  "unique": ["sc"]
+             },
+             "description": "List of scope combinations. Each combination in the list will be combined using the logical operator OR to determine if a field is applicable for a particular scope combination.",
+             "me_display_literal": "scope_combination_list"
+      },
+       "csc":{
+          "type":"object"
+          ,"me_display_literal":"chronological_scope_combination"
+          ,"description":"list of chronological scopes added as properties with scope.dbcolumn as the key with optional lower and upper properties whose values are set from scope.dbvalues.dbvalue. The scope dbcolumn used here  should have csc equals to true in scope metadata. Lower and upper bound are used to capture the scopes range for the particular Object."
+          }
+    },
+    "required": [
+        "_id",
+        "friendly_name",
+        "display_literal",
+        "report_type",
+        "summary"
+    ],
+    "unique": [
+        "_id",
+        "friendly_name"
+    ],
+    "auto": [
+        "_id"
+    ]
+}

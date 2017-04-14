@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Orgtypes",
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "description": "Uniquely identifying object for any Orgtype. This id is a combination of version and  a string value representing the Orgtype.",
+            "identifier": true,
+            "properties": {
+                "version": {
+                    "type": "integer"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "version",
+                "value"
+            ],
+            "auto": [
+                "version",
+                "value"
+            ]
+        },
+        "hierarchy_order": {
+            "type": "order",
+            "description": "An integer value that defines the order in the hierarchy."
+        },
+        "name": {
+            "type": "string",
+            "description": "friendly name of the org type."
+        },
+        "type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1,
+            "description": "User provided unique character identifying the type of organization."
+        },
+        "active": {
+            "type": "boolean",
+            "description": " used to control which orgtype will not be displayed on the UI."
+        },
+        "independent": {
+            "type": "boolean",
+            "description": "if set to true, the org entity will be displayed outside the hierarchy at the very end of the org tree."
+        },
+        "roster_dbcolumn":{
+            "type":"string",
+            "description": "The dbcolumn name to be used for roster data."
+        }
+    },
+    "required": [
+        "_id",
+        "hierarchy_order",
+        "name",
+        "active",
+        "type"
+    ],
+    "unique": [
+        "_id",
+        "hierarchy_order",
+        "name",
+        "type"
+    ],
+    "auto": [
+        "_id",
+        "hierarchy_order"
+    ]
+}

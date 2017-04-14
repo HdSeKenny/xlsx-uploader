@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_info_header",
+    "type": "object",
+    "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "isr_info_header"
+            ]
+        }
+        , "domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The id of the group header. If it is blank, it doesn't belong to any group."
+        }
+         , "column_id":{
+            "type": "integer"
+            , "description": "map to the corresponding column for tabular view."
+        }
+        ,"header_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the header"
+        }
+        ,"value_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the value"
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "optional": ["header_style","value_style"]
+    , "required": ["header_literal", "display_order" ,"header_id", "type"]
+}

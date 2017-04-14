@@ -1,0 +1,113 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Scopes",
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "description": "Uniquely identifying object for any scope. This id is a combination of version and an integer value representing the scope.",
+            "identifier": true,
+            "properties": {
+                "version": {
+                    "type": "integer"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "version",
+                "value"
+            ],
+            "auto": [
+                "version",
+                "value"
+            ]
+        },
+        "dbcolumn": {
+            "type": "string",
+            "description": "the column name used in the domain data collection."
+        },
+        "scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1,
+            "description": "unique user provided character that identifies the scope."
+        },
+        "display_literal": {
+            "type": "string",
+            "description":"the display literal for the scope on the main selector page."
+        },
+        "cs":{
+            "type":"boolean",
+            "description":"cs stands for Chronological scope, if true, the scope is used for chronological range for scope combination list",
+            "me_display_literal": "Chronological Scope"
+        },
+        "reverse_order":{
+            "type":"boolean",
+            "description":"If true, display the following scope selector based on the display_order in the opposite direction."
+        },
+        "dbvalues": {
+            "type": "array",
+            "description": "the possible metadata values found in the domain data collection.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "dbvalue": {
+                        "type": "string",
+                        "description": "value used in the database."
+                    },
+                    "code": {
+                        "type": "integer",
+                        "description": "Uniquely identifying value for each scope. This is auto incrementing value managed by the explorer."
+                    },
+                    "display_literal": {
+                        "type": "string",
+                        "description": "A string value used for displaying the report on the UI."
+                    },
+                    "display_order": {
+                        "type": "order",
+                        "description": "An integer value that defines the display order of the values of one particular scope in the UI"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "A boolean value that controls the display of value of scope on the UI."
+                    },
+                    "rh_literal":{
+                        "type":"string",
+                        "description":"A string value used for displaying the scope on report header.",
+                        "me_display_literal": "Report Header Literal"
+                    }
+                },
+                "required": [
+                    "code",
+                    "display_order",
+                    "active"
+                ],
+                "auto": [
+                    "code",
+                    "display_order"
+                ],
+                "unique": [
+                    "code"
+                ]
+            },
+            "uniqueItems": true
+        }
+    },
+    "required": [
+        "_id",
+        "dbcolumn",
+        "dbvalues",
+        "scope",
+        "display_literal"
+    ],
+    "unique": [
+        "_id",
+        "dbcolumn",
+        "scope"
+    ],
+    "auto": [
+        "_id"
+    ]
+}

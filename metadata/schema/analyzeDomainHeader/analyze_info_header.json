@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "analyze_info_header",
+  "type": "object",
+  "properties": {
+    "header_literal": {
+      "type": "string",
+      "description": "Header literal to be displayed on the UI."
+    },
+    "display_order": {
+      "type": "string",
+      "description": "The order in which this header has to be displayed on the UI."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "analyze_info_header"
+      ]
+    },
+    "domainfield": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer"
+        },
+        "dbcolumn": {
+          "type": "string"
+        }
+      }
+    },
+    "header_id": {
+      "type": "integer",
+      "description": "The app managed unique id within the DomainHeaders entry."
+    }
+  },
+  "auto": ["header_id"],
+  "unique": ["header_id"],
+  "required": ["header_literal", "display_order", "header_id", "type"]
+}

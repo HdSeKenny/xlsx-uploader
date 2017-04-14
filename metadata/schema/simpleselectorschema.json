@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "selector_simple",
+    "type": "object",
+    "description": "none, listbox, radiobutton, checkbox and dropdown selector schema",
+    "properties": {
+        "type": {
+            "type": "string",
+            "enum": [
+                "none",
+                "checkbox",
+                "radiobutton",
+                "dropdown",
+                "listbox"
+            ],
+            "description": "Enumerated list of values."
+        },
+        "selectors": {
+            "type": "array",
+            "description": "only one entry allowed in the array.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "integer"
+                    },
+                    "scope": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1
+                    },
+                    "dbcolumn": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value",
+                    "scope",
+                    "dbcolumn"
+                ],
+                "auto": [
+                    "value",
+                    "scope",
+                    "dbcolumn"
+                ]
+            }
+        }
+    },
+    "required": [
+        "type",
+        "selectors"
+    ]
+}

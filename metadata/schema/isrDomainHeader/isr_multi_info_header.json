@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_multi_info_header",
+    "type": "object",
+    "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "isr_multi_info_header"
+            ]
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        ,"header_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the header"
+        }
+        ,"value_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the value"
+        }
+        ,"parent_header_id":{
+            "type": "integer"
+            , "description": "point to the parent header's id of current header"
+        }
+        , "entries": {
+            "type": "array"
+            , "items": {
+                "type": "object"
+                , "properties": {
+                    "domainfield": {
+                        "type": "object"
+                        , "properties": {
+                            "value": {
+                                "type": "integer"
+                            }
+                            , "dbcolumn": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                    , "row_id": {
+                        "type": "integer"
+                    }
+                }
+                , "required": ["domainfield", "row_id"]
+                , "unique": ["row_id"]
+            }
+            , "uniqueItems": true
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "optional": ["header_style","value_style"]
+    , "required": ["header_literal", "display_order" ,"header_id", "type"]
+}

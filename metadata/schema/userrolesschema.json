@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UserRoles",
+  "type": "object",
+  "properties": {
+        "_id": {
+            "type": "object"
+            , "description": "Uniquely identifying object for any scope. This id is a combination of version and an integer value representing the scope."
+            , "properties": {
+                    "version": {
+                        "type": "integer"
+                    },
+                    "value": {
+                        "type": "integer"
+                    }
+            }
+            , "required": ["version","value"]
+            , "auto": ["version","value"]
+        },
+        "name": {
+            "type": "string",
+            "description": "A string value to be displayed on the UI."
+        },
+        "permissions": {
+            "type": "array",
+            "items": {
+                "type": "object"
+                , "description": "Supported permission types."
+                , "oneOf": [
+                    { "$ref": "feature_ChangePassword" }
+                    , { "$ref": "feature_ViewUserActivity" }
+                    , { "$ref": "feature_ManageUser" }
+                ]
+            }
+        }
+  },
+  "required": ["_id", "name"]
+  , "unique": ["_id"]
+  , "auto": ["_id"]
+}

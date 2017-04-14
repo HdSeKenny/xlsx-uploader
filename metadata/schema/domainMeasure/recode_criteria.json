@@ -1,0 +1,66 @@
+{
+            "type": "array"
+            , "items": {
+                "type": "object"
+                , "description": "The criteria to be used by the api (passed by the client) to recoded any particular value of a matching criteria. This recoding should be applied to all the measures with operations that use this measure."
+                , "properties": {
+                    "recode_criteria_id": {
+                        "type": "integer"
+                        , "description": "App managed unique id that other areas of this object use."
+                    }
+                    , "domainfield": {
+                        "type": "object"
+                            , "properties": {
+                                "value": {
+                                    "type": "integer"
+                                }
+                                , "dbcolumn": {
+                                    "type": "string"
+                                }
+                            }
+                            , "description": "DomainField object with value and dbcolumn attributes for which the recoded criteria is being described."
+                    }
+                    , "condition": {
+                        "type": "object"
+                        , "properties": {
+                            "operation":
+                            {
+                                "type": "string"
+                                    , "description": "Condition operator to be used to determine if a value has to be recoded."
+                                    , "enum": [
+                                    "lte"
+                                    , "lt"
+                                    , "gt"
+                                    , "gte"
+                                    , "eq"
+                                    , "neq"
+                                    ,"in"
+                                    ]
+                            }
+                            , "value": {
+                               "type": "array"
+                                , "items": "string"
+                                , "description": "The reference value to be checked against."
+                            }
+                        }
+                    }
+                 , "display_domainfield": {
+                        "type": "object"
+                        , "description": "The display object to be used instead of the original value."
+                        , "properties":{
+                          "value":{
+                            "type":"integer"
+                        },
+                        "dbcolumn":{
+                            "type":"string"
+                        }
+
+                    }
+                    }
+                }
+                , "unique": ["domainfield", "recode_criteria_id"]
+                , "required": ["domainfield", "condition", "display_domainfield", "recode_criteria_id"]
+                , "auto": ["recode_criteria_id"]
+            }
+            , "uniqueItems": true
+        }

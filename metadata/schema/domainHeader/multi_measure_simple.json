@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "multi_measure_simple",
+    "type": "object",
+    "description": "Used for measures with simple options of sort and graph."
+    , "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI. This display order is hierarchical in nature."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "multi_measure_simple"
+            ]
+        }
+        , "entries": {
+            "type": "array"
+            , "items": {
+                "type": "object"
+                , "properties": {
+                    "domainmeasure": {
+                        "type": "object"
+                        , "properties": {
+                            "value": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                    , "domainfield": {
+                        "type": "object"
+                        , "properties": {
+                            "value": {
+                                "type": "integer"
+                            }
+                            , "dbcolumn": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                    , "row_id": {
+                        "type": "integer"
+                    }
+                }
+                , "required": ["dmainmeasure", "domainfield", "row_id"]
+                , "unique": ["row_id"]
+            }
+            , "uniqueItems": true
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "csv_header_literal": {
+            "type": "string"
+            , "description": "The header literal to be used for csv extracts."
+        }
+        , "mouseover_literal": {
+            "type": "string"
+            , "description": "The header literal to be used for mouseover."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["display_order" ,"header_id", "type"]
+}

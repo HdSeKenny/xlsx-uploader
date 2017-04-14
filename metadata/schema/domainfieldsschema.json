@@ -1,0 +1,145 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "DomainFields",
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "description": "Uniquely identifying object for any particular DomainField entry. This id is a combination of version and an integer value representing the DomainFields entry."
+            , "identifier": true
+            , "properties": {
+                "version":{
+                    "type": "integer"
+                }
+                , "value":{
+                    "type": "integer"
+                }
+            }
+            , "required": ["version","value"]
+            , "auto": ["version","value"]
+        },
+        "domain_value": {
+            "type": "integer",
+            "description":"the selected Domain for this DomainField."
+        },
+        "dbcolumn": {
+            "type": "string",
+            "description":"the column name used in the database to capture this domain field. This is usually filled in by the data analyst/dev/db dev/pm by working with app dev or the db dev."
+        },
+        "friendly_name":{
+            "type":"string",
+            "description":"A string value used for displaying domain field on the MetadataExplorer UI, and it needs to be unique."
+        },
+        "display_literal":{
+            "type":"string",
+            "description":"A string value used for displaying domain field on the Client UI."
+        },
+         "mouseover_literal":{
+            "type":"string",
+            "description":"A string value used for displaying domain field when mouse-over(some domain fields have mouse-over display)."
+        },
+        "csv_literal":{
+            "type":"string",
+            "description":"A string value to be used for csv extracts."
+        },
+        "rh_literal":{
+            "type":"string",
+            "description":"A string value to be used for displaying on report header.",
+            "me_display_literal":"Report Header Literal"
+        },
+        "ru": {
+            "type": "integer",
+            "enum": [0,1,2],
+            "me_display_literal": "report_usage",
+            "description": "Used to flag whether this is a DomainFields used for summary, individual or both, 0-summary, 1-individual, 2-both."
+        },
+        "uv":{
+            "type": "array",
+            "enum":["s","d"],
+            "me_display_literal":"univariate",
+            "description":"used to decide the actions on roster analytics univariate domainfields,which will have univariateactions, s-summarize, d-distribute."
+        },
+        "bv":{
+            "type": "array",
+            "enum":["p","c"],
+            "me_display_literal":"bivariate",
+            "description":"used to decide the actions on roster analytics bivariate domainfields,which will have bivariate actions, p-plot, c-crosstab."
+        },
+        "dbvalues": {
+            "type": "array",
+            "description":"the possible domain field values. This is mostly useful for the dimension category fields.",
+            "items": {
+                "type": "object",
+                "properties":{
+                    "dbvalue":{
+                        "type":"string",
+                        "description":"value used in the database."
+                    },
+                    "display_literal":{
+                        "type":"string",
+                        "description":"A string value used for displaying the field value on the UI."
+                    },
+                    "display_order":{
+                        "type":"order",
+                        "description":"An integer value that defines the display order of the values on the UI."
+                    },
+                    "active":{
+                        "type":"boolean",
+                        "description":"A boolean value that controls the display of value on the UI."
+                    },
+                    "sl":{
+                        "type":"string",
+                        "me_display_literal":"short_literal",
+                        "description":"An optional attribute for display in places where non-verbose literal is needed."
+                    }
+                },
+                "required":["display_literal","display_order","active"]
+                , "unique": ["dbvalue"]
+                , "auto": ["display_order"]
+            },
+            "uniqueItems":true
+        },
+        "scl": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "sc": {
+                          "type": "object"
+                          ,"me_display_literal": "scope_combination"
+                          ,"unique": true
+                          ,"description": " Each property will be from scope.dbcolumn as key, and corresponding scope.dbvalues.dbvalue as value.  All the scopes in this list will be combined using the logical operator AND to determine if a field is applicable for a particular scope combination."
+                        }
+                    ,"mol": {
+                          "type": "string",
+                          "description": "mouse over literal sometimes changes by scope combination. This is an optional field to filled if the mouse over literal is different for any scope combination.",
+                          "me_display_literal":"mouseover_literal"
+                    }
+                    , "csv_literal":{
+                        "type":"string",
+                        "description":"This is an optional field if the csv literal is different for any scope combination."
+                    }
+                },
+                "required": ["sc"],
+                "unique": ["sc"]
+                },
+            "description": "List of scope combinations. Each combination in the list will be combined using the logical operator OR to determine if a field is applicable for a particular scope combination.",
+            "me_display_literal": "scope_combination_list"
+        },
+        "csc":{
+           "type":"object"
+           ,"me_display_literal":"chronological_scope_combination"
+           ,"description":"list of chronological scopes added as properties with scope.dbcolumn as the key with optional lower and upper properties whose values are set from scope.dbvalues.dbvalue. The scope dbcolumn used here  should have csc equals to true in scope metadata. Lower and upper bound are used to capture the scopes range for the particular Object."
+        },
+        "category":{
+            "type": "string",
+            "enum": ["measure", "field", "dimension"]
+        },
+        "active": {
+            "type": "boolean"
+        }
+     },
+    "required": ["_id", "domain_value","display_literal","category","active", "ru","rh_literal"]
+    , "unique": ["_id", ["friendly_name","domain_value"], ["friendly_name","domain_value","dbcolumn"]]
+    , "auto": ["_id"]
+}

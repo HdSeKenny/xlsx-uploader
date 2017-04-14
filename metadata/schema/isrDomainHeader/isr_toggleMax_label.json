@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_toggleMax_label",
+    "type": "object",
+    "properties": {
+        "friendly_name": {
+            "type": "string"
+            , "description": "Literal to be displayed on ME UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "isr_toggleMax_label"
+            ]
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        },
+         "literalfield" : {
+            "type":"integer"
+            ,"description":"use literal as header_literal from literalFields with corresponding id. "
+        },
+        "header_style":{
+            "type":"string"
+                ,"description":"this is an optional attribute to provide the inline style support for the header"
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "optional":["header_style"]
+    , "required": ["friendly_name", "display_order" ,"header_id", "type","literalFields"]
+}

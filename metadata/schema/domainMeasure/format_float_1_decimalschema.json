@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "format_float_1_decimal",
+    "type": "object",
+    "properties": {
+        "value": {
+            "type": "string",
+            "enum": [
+                "0:F1"
+            ],
+            "description": "float one decimal place."
+        }
+    },
+    "required": [
+        "value"
+    ]
+}

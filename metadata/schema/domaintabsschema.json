@@ -1,0 +1,130 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "DomainTabs",
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "description": "Uniquely identifying object for any particular DomainTabs entry. This id is a combination of version and an integer value representing the DomainTabs entry.",
+            "identifier": true,
+            "properties": {
+                "version": {
+                    "type": "integer"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "version",
+                "value"
+            ],
+            "auto": [
+                "version",
+                "value"
+            ]
+        },
+        "domain_value": {
+            "type": "integer",
+            "description": "the selected Domain for this DomainField."
+        },
+		"hidden": {
+            "type": "boolean",
+            "description":"If true, this will be hidden on the report, otherwise, it will show up"
+        },
+        "display_literal": {
+            "type": "string",
+            "description": "A string value used for displaying domain tabs on the UI, and it needs to be unique."
+        },
+        "friendly_name": {
+            "type": "string",
+            "description": "Just an internal name that will be used when listing the tabs on the MetadataExplorer UI."
+        },
+        "tabType":{
+            "type": "string",
+            "enum": ["columns", "disaggregate", "filter", "search"]
+        },
+        "groups": {
+            "type": "array",
+            "description": "This is required if a tab can have report selectors that have to be grouped under a particular label. In this case the groups of report selectors are mutually exclusive in terms of the user selections and display. Only one group of report selectors could be displayed and interacted with on the UI by selecting the respective group label. The first group in the list will be selected by default on the Client UI.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "display_literal": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "description": "App managed unique id for the group."
+                    },
+                    "display_order": {
+                        "type": "integer"
+                    }
+                    , "charting_options":{
+                        "type": "array"
+                        , "items":{
+                            "type": "object"
+                            , "oneOf":[{ "$ref": "horizontal_bar" }]
+                        }
+                    }
+                },
+                "required": [
+                    "display_literal",
+                    "id",
+                    "display_order"
+                ],
+                "unique": [
+                    "id",
+                    "display_literal"
+                ],
+                "auto": [
+                    "id"
+                ]
+            }
+        },
+        "report_selectors": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "display_order": {
+                        "type": "integer"
+                    },
+                    "report_selector": {
+                        "type": "object",
+                        "oneOf": [
+                            {
+                                "$ref": "rs_one_way"
+                            },
+                            {
+                                "$ref": "rs_two_way"
+                            },
+                            {
+                                "$ref": "rs_two_way_split"
+                            },
+                            {
+                                "$ref": "rs_filter"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "_id",
+        "domain_value",
+        "display_literal",
+        "tabType"
+    ],
+    "unique": [
+        "_id",
+        [
+            "friendly_name",
+            "domain_value"
+        ]
+    ],
+    "auto": [
+        "_id"
+    ]
+}

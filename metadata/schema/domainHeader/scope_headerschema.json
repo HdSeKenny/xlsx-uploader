@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "scope_header",
+    "type": "object",
+    "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI for columns that hold scope values."
+        }
+        , "display_order": {
+            "type": "integer"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "scope_header"
+            ]
+        }
+        , "mouseover_literal": {
+            "type": "string"
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "actions": {
+            "type": "array"
+            , "items": {
+                "oneOf": [
+                    "sort"
+                ]
+            }
+        }
+        , "scope": {
+            "type": "object"
+            , "properties": {
+                "dbcolumn":{
+                    "type": "string"
+                }
+            }
+            , "description":  "The scope dbcolumn value associated with this header."
+        }
+        , "csv_header_literal":{
+            "type": "string"
+            , "description": "The header literal to be used for csv extracts."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["header_literal", "display_order" ,"header_id", "type", "scope"]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "analyze_name_header",
+  "type": "object",
+  "properties": {
+    "friendly_name": {
+      "type": "string",
+      "description": "The display literal on ME UI."
+    },
+    "display_order": {
+      "type": "string",
+      "description": "The order in which this header has to be displayed on the UI."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "analyze_name_header"
+      ]
+    },
+    "header_id": {
+      "type": "integer",
+      "description": "The app managed unique id within the DomainHeaders entry."
+    },
+    "domainfield": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer"
+        },
+        "dbcolumn": {
+          "type": "string"
+        }
+      }
+    },
+    "excluded_orgtypes": {
+      "type": "array",
+      "description": "A list of orgtypes where the name header should not be displayed.",
+      "items": {
+        "type": "string",
+        "description": "The 'type' value from the Orgtypes collection."
+      }
+    }
+  },
+  "auto": ["header_id"],
+  "unique": ["header_id"],
+  "required": ["friendly_name", "display_order", "header_id", "type"]
+}

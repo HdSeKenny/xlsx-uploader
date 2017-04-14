@@ -1,0 +1,68 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "LiteralFields",
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "description": "Uniquely identifying object for any particular LiteralFields entry. This id is a combination of version and an integer value representing the LiteralFields entry."
+            , "identifier": true
+            , "properties": {
+                "version":{
+                    "type": "integer"
+                }
+                , "value":{
+                    "type": "integer"
+                }
+            }
+            , "required": ["version","value"]
+            , "auto": ["version","value"]
+        },
+        "domain_value": {
+            "type": "integer",
+            "description":"the selected Domain for this LiteralField."
+        },
+        "summary": {
+            "type": "boolean",
+            "description":"If true, this is a LiteralFields belong to Summary Report, else it belongs to Roster report"
+        },
+        "friendly_name":{
+            "type":"string",
+            "description":"A string value used for displaying domain field on the MetadataExplorer UI, and it needs to be unique."
+        },
+         "literal":{
+            "type":"string",
+            "description":"If summary is true, it is a string value used for displaying domain field when mouse-over(some domain fields have mouse-over display). otherwise, it will be a header_literal"
+        },
+        "scl": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "sc": {
+                    "type": "object"
+                    ,"me_display_literal": "scope_combination"
+                    ,"unique": true
+                    ,"description": " Each property will be from scope.dbcolumn as key, and corresponding scope.dbvalues.dbvalue as value.  All the scopes in this list will be combined using the logical operator AND to determine if a field is applicable for a particular scope combination."
+                    }
+                    ,"literal": {
+                      "type": "string",
+                      "description": "The literal sometimes changes by scope combination. This is an optional field to filled if the literal is different for any scope combination."
+                    }
+                },
+                "required": ["sc"],
+                "unique": ["sc"]
+            },
+            "description": "List of scope combinations. Each combination in the list will be combined using the logical operator OR to determine if a field is applicable for a particular scope combination.",
+            "me_display_literal": "scope_combination_list"
+        },
+                 "csc":{
+                    "type":"object"
+                    ,"me_display_literal":"chronological_scope_combination"
+                    ,"description":"list of chronological scopes added as properties with scope.dbcolumn as the key with optional lower and upper properties whose values are set from scope.dbvalues.dbvalue. The scope dbcolumn used here  should have csc equals to true in scope metadata. Lower and upper bound are used to capture the scopes range for the particular Object."
+                }
+     },
+    "required": ["_id", "domain_value","literal"]
+    , "unique": ["_id", ["friendly_name","domain_value"]]
+    , "auto": ["_id"]
+}

@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "multi_measure_mean_with_toggleMax",
+  "type": "object",
+  "description": "Used for measures with mean operation with an option to have toggleMax option in transpose report type.",
+  "properties": {
+    "percent_header_literal": {
+      "type": "string",
+      "description": "Literal to be displayed below the parent header on the UI for percent value."
+    },
+    "max_header_literal": {
+      "type": "string",
+      "description": "Literal to be displayed below the parent header on the UI for max value."
+    },
+    "header_literal": {
+      "type": "string",
+      "description": "Literal to be displayed below the parent header on the UI for mean value."
+    },
+    "display_order": {
+      "type": "string",
+      "description": "The order in which this header has to be displayed on the UI."
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          "graph",
+          "toggleMax"
+        ]
+      }
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "multi_measure_mean_with_toggleMax"
+      ]
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domainmeasure": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer"
+              }
+            }
+          },
+          "domainfield": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer"
+              },
+              "dbcolumn": {
+                "type": "string"
+              }
+            }
+          },
+          "max_domainmeasure": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer"
+              }
+            }
+          },
+          "max_domainfield": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer"
+              },
+              "dbcolumn": {
+                "type": "string"
+              }
+            }
+          },
+            "percent_domainmeasure": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer"
+              }
+            }
+          },
+          "percent_domainfield": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer"
+              },
+              "dbcolumn": {
+                "type": "string"
+              }
+            }
+          },
+         "row_id": {
+            "type": "integer"
+         }
+        }
+        , "required": ["dmainmeasure", "domainfield", "row_id", "max_domainmeasure", "max_domainfield"]
+        , "unique": ["row_id"]
+      }
+      , "uniqueItems": true
+    },
+    "header_id": {
+      "type": "integer",
+      "description": "The app managed unique id within the DomainHeaders entry."
+    },
+    "csv_header_literal": {
+      "type": "string",
+      "description": "The literal to be used for csv extracts."
+    },
+    "mouseover_literal": {
+      "type": "string",
+      "description": "The literal to be used for mouseover."
+    },
+    "append_literal": {
+      "type": "string",
+      "description": "The literal to be used for appending to mouseover/csv literal for the header."
+    },
+    "percent_append_literal": {
+      "type": "string",
+      "description": "The literal to be used for appending for percent column."
+    },
+    "max_append_literal": {
+      "type": "string",
+      "description": "The literal to be used for appending for max column."
+    },
+    "parent_header_id": {
+      "type": "integer",
+      "description": "The header of the parent header."
+    }
+  },
+  "auto": [
+    "header_id"
+  ],
+  "unique": [
+    "header_id"
+  ],
+  "required": [
+    "display_order",
+    "header_id",
+    "type",
+    "domainfield"
+  ]
+}

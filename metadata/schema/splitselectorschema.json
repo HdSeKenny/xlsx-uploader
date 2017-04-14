@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "selector_split",
+    "type": "object",
+    "description": "split selector schema",
+    "properties": {
+        "type": {
+            "type": "string",
+            "enum": [
+                "split"
+            ],
+            "description": "the value of this property should always be split."
+        },
+        "selectors": {
+            "type": "array",
+            "description": "only two entries allowed in the array.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "integer"
+                    },
+                    "scope": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1
+                    },
+                    "dbcolumn": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "list of enum values that could be assigned to this property.",
+                        "enum": [
+                            "checkbox",
+                            "radiobutton",
+                            "dropdown",
+                            "listbox"
+                        ]
+                    }
+                },
+                "required": [
+                    "value",
+                    "type",
+                    "scope",
+                    "dbcolumn"
+                ],
+                "auto": [
+                    "value",
+                    "scope",
+                    "dbcolumn"
+                ]
+            }
+        }
+    },
+    "required": [
+        "type",
+        "selectors"
+    ]
+}

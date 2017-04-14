@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "horizontal_bar",
+    "type": "object",
+    "properties": {
+        "chart_type": {
+            "type": "string"
+            , "enum": ["centered","basic"]
+            , "description": "Supported graph type. For centered graphs configure the domainheaders measures with orient attribute."
+        }
+        , "percent_plot": {
+            "type": "boolean"
+            , "description": "Set to true if it is a percent plot. If not a percent plot then the min and max measures have to be configured appropriately in domainheaders."
+        }
+        , "vertical_stack": {
+            "type": "boolean"
+            , "description": "Set to true if the identified measures have to be stacked vertically, else false for horizontal stacking."
+        }
+        , "chunk_by_pivot_headers": {
+            "type": "boolean"
+            , "description": "If set to true the graph will be chunked based on the pivot_header values. Else it will be a monolithic graph if both chunk_by_scope_headers and chunk_by_pivot_headers are set to false."
+        }
+        , "chunk_by_scope_headers": {
+            "type": "boolean"
+            , "description": "If set to true the graph will be chunked based on the scope_header values. Else it will be a monolithic graph if both chunk_by_scope_headers and chunk_by_pivot_headers are set to false."
+        }
+        , "labeling": {
+            "type": "integer"
+            , "enum": [0,1]
+            , "description": "Used only when vertical_stack is true. 0- no labeling. 1- header_literal labeling."
+        }
+        , "legend": {
+            "type": "integer"
+            , "enum": [0,1,2]
+            , "description": "0- no legend. 1- header_literal + mouseover, 2- header_literal only. For option 1&2, legend is displayed based on the plot_color configured in DomainHeaders."
+        }
+    }
+}

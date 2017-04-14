@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "roster_score",
+    "type": "object",
+    "properties": {
+        "domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+            , "description": "DomainField object with value and dbcolumn attributes for which the operation is being described."
+        }
+        , "format": {
+            "type": "string"
+            , "oneOf": [
+                { "$ref": "format_whole.value" }
+                , { "$ref": "format_float_1_decimal.value" }
+                , { "$ref": "format_float_2_decimal.value" }
+             ]
+        }
+        , "public":{
+            "type": "object"
+            , "properties": {
+                "mask_criteria_id": {
+                    "type": "integer"
+                    , "description": "mask_criteria_id from the entry in the mask_criteria"
+                }
+            }
+        }
+        , "secure":{
+            "type": "object"
+            , "properties": {
+                "recode_criteria_id": {
+                    "type": "integer"
+                    , "description": "recode_criteria_id from the entry in the recode_criteria"
+                },
+                "valid_criteria_id": {
+                    "type": "integer"
+                    , "description": "valid_criteria_id from the entry in the valid_criteria"
+                }
+            }
+        }
+     }
+    , "unique": ["domainfield"]
+    , "required": ["domainfield" ,"format"]
+}

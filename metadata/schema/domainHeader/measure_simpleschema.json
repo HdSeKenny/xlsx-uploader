@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "measure_simple",
+    "type": "object",
+    "description": "Used for measures with simple options of sort and graph."
+    , "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI."
+        }
+        , "friendly_name":{
+            "type":"string",
+            "description":"A string value used for displaying header on the ME UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "actions": {
+            "type": "array",
+            "items":{
+                "oneOf": [
+                    "sort"
+                    , "graph"
+                ]
+            }
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "measure_simple"
+            ]
+        }
+        , "domainmeasure": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+            }
+        }
+        , "domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The header of the parent header."
+        }
+        , "csv_header_literal": {
+            "type": "string"
+            , "description": "The header literal to be used for csv extracts."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["display_order" ,"header_id", "type", "domainfield"]
+}

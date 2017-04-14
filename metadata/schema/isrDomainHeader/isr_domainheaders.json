@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_DomainHeaders",
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "object",
+            "description": "Uniquely identifying object for any isr_DomainHeaders entry. This id is a combination of version and an integer value representing the entry."
+            , "identifier": true
+            , "properties": {
+                "version":{
+                    "type": "integer"
+                }
+                , "value":{
+                    "type": "integer"
+                }
+            }
+            , "required": ["version","value"]
+            , "auto": ["version","value"]
+        }
+        , "domain_value": {
+            "type": "integer"
+            , "description":"the selected Domain for this DomainField."
+        }
+        , "friendly_name": {
+            "type": "string"
+            , "description": "The unique friendly_name to be used for display purposes in the MetadataExplorer app."
+        }
+        , "header": {
+            "type": "object"
+            , "oneOf": [
+                    { "$ref": "isr_domain_headers_regular" }
+                    , { "$ref": "isr_domain_headers_transposed" }
+            ]
+        }
+              
+    }
+    , "required": ["_id", "domain_value","friendly_name"]
+    , "auto": ["_id"]
+    , "unique": ["_id", ["domain_value","friendly_name"]]
+}

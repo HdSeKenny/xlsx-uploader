@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "roster_domain_headers_regular",
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string"
+            , "enum": ["r"]
+        }
+        , "entries": {
+            "type": "array",
+            "items": {
+                "type": "object"
+                , "oneOf": [
+                    { "$ref": "fixed_header" }
+                    ,{ "$ref": "field_header" }
+                    ,{ "$ref": "parent_header" }
+                    , { "$ref": "roster_measure_simple" }
+                    , { "$ref": "roster_measure_toggleMax" }
+                ]
+            }
+        }
+    }
+    , "required": ["type"]
+}

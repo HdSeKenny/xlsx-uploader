@@ -1,0 +1,13 @@
+input[type=file].file-upload {
+  background: red;
+  width: 106px;
+  height: 34px;
+  border-radius: 4px;
+  display: none;
+}
+
+.selected-file {
+  color: gray;
+  margin-left: 10px;
+  font-style: italic;
+}

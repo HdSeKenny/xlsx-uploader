@@ -1,0 +1,59 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_tabular_header",
+    "type": "object",
+    "properties": {
+        "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the domainheaders entry."
+        }
+        , "friendly_name": {
+            "type": "string"
+            , "description": "literal to be displayed on the ME UI."
+        }
+        , "header_literal": {
+            "type": "string"
+            , "description": "Header literal to be displayed on the UI for the tabular view."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "isr_tabular_header"
+            ]
+        }
+        , "columns": {
+            "type": "array"
+            , "items": {
+                "type":"object"
+                , "properties": {
+                    "column_id": {
+                        "type": "integer"
+                        , "description": "unique app managed column identifier."
+                    }
+                    , "display_order": {
+                        "type": "integer"
+                        , "description": "The order in which this column has to be displayed on the table."
+                    }
+                    , "display_literal": {
+                        "type": "string"
+                        , "description": "Literal to display the column on the UI."
+                    }
+                }
+                , "required": ["column_id", "display_order", "display_literal"]
+                , "auto": ["column_id", "display_order"]
+                , "unique": ["column_id","display_order","display_literal"]
+            }
+        }
+        , "header_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the header"
+        }       
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["friendly_name", "display_order" ,"header_id", "type"]
+}

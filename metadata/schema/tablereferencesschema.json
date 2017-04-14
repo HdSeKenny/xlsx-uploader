@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "TableReferences",
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "object",
+      "description": "Uniquely identifying object for any TableReference entry",
+      "identifier": true,
+      "properties": {
+        "version": {
+          "type": "integer"
+        },
+        "value": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "version",
+        "value"
+      ],
+      "auto": [
+        "version",
+        "value"
+      ]
+    },
+    "domain": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer"
+        }
+      },
+      "description": "domain value in Domain metadata"
+    },
+    "name": {
+      "type": "string",
+      "description": "name of database table being used in the serialization"
+    },
+    "version": {
+      "type": "integer",
+      "description": "current version"
+    }
+  },
+  "required": [
+    "_id",
+    "version",
+    "domain"
+  ],
+  "unique": [
+    "_id",
+    [
+      "domain",
+      "name"
+    ]
+  ],
+  "auto": [
+    "_id"
+  ]
+}

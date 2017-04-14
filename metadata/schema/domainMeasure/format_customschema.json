@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "format_custom",
+    "type": "object",
+    "properties": {
+        "value": {
+            "type": "string"
+            , "enum": ["S-{0:F0}"]
+            , "description": "Custom text formatting to include pre/post literal info as needed."
+        }
+     },
+    "required": ["value"]
+}

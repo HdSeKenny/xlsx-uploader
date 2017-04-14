@@ -1,0 +1,121 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_measure_simple",
+    "type": "object",
+    "description": "Used for measures with simple operations."
+    , "properties": {
+        "header_literal": {
+            "type": "string"
+            , "description": "Literal to be displayed on the UI."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed on the UI."
+        }
+        , "type": {
+            "type": "string"
+            , "enum": [
+                "isr_measure_simple"
+            ]
+        }
+        , "domainmeasure": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+            }
+        }
+        , "domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        ,"description":{
+            "type": "integer"
+            , "enum": [0,1]
+            ,"description":"controls whether a detailed description of the score is needed or not,0 means no need for detailed description, 1 means needed"
+        }
+        , "display_criteria":{
+            "type":"integer",
+            "description":"if display_criteria is 1, means when the score value is not a number, don't display the headers and values. And it is an optional attribute"
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "parent_header_id": {
+            "type": "integer"
+            , "description": "The id of the group header."
+        }
+        , "column_id":{
+            "type": "integer"
+            , "description": "map to the corresponding column for tabular view."
+        }
+        , "header_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the header"
+        }
+        , "value_style":{
+            "type":"string"
+            ,"description":"this is an optional attribute to provide the inline style support for the value"
+        }
+        , "chart_config": {
+            "type": "object"
+            , "properties": {
+                    "chart": {
+                        "type": "boolean"
+                        , "description": "If true, plot chart for the measure."
+                    }
+                    , "max_domainmeasure": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                    , "max_domainfield": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "integer"
+                            },
+                            "dbcolumn": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                    , "min_domainmeasure": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                    , "min_domainfield": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "integer"
+                            },
+                            "dbcolumn": {
+                                "type": "string"
+                            }
+                        }
+                    }
+            }
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "optional": ["header_style","value_style"]
+    , "required": ["display_order", "header_literal", "header_id", "type", "domainfield"]
+}

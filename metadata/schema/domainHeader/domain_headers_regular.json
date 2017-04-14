@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "domain_headers_regular",
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string"
+            , "enum": ["r"]
+            , "description": "Header type could be either r-regular or t-transposed."
+        }
+        , "entries": {
+            "type": "array",
+            "items": {
+                "type": "object"
+                , "oneOf": [
+                    { "$ref": "parent_header" }
+                    , { "$ref": "group_header" }
+                    , { "$ref": "scope_header" }
+                    , { "$ref": "measure_simple" }
+                    , { "$ref": "measure_percent_with_toggleN" }
+                    , { "$ref": "measure_mean_with_toggleMax" }
+                ]
+            }
+        }
+    }
+    , "required": ["type"]
+}

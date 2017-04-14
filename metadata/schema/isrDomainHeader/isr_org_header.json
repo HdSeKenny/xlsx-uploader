@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "isr_org_header",
+    "type": "object",
+    "description":"isr_org_header used for providing cumulative report drill to ISR org id, and it will not be displayed on report",
+    "properties": {
+        "type": {
+           "type": "string"
+            , "enum": [
+                "isr_org_header"
+            ]
+        }
+        , "domainfield": {
+            "type": "object"
+            , "properties": {
+                "value": {
+                    "type": "integer"
+                }
+                , "dbcolumn": {
+                    "type": "string"
+                }
+            }
+        }
+        , "header_id": {
+            "type": "integer"
+            , "description": "The app managed unique id within the DomainHeaders entry."
+        }
+        , "display_order": {
+            "type": "string"
+            , "description": "The order in which this header has to be displayed."
+        }
+    }
+    , "auto": ["header_id"]
+    , "unique": ["header_id"]
+    , "required": ["header_id", "type", "display_order"]
+}

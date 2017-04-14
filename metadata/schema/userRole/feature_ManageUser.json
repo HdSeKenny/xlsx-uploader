@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "feature_ManageUser",
+    "type": "object",
+    "properties": {
+        "feature": {
+            "type": "string"
+            , "enum": ["ManageUser"]
+        }
+        , "actions": {
+            "type": "array",
+            "items": {
+                "type": "object"
+                , "description": "Supported action types."
+                , "oneOf": [
+                    { "$ref": "action_simple" }
+                    , { "$ref": "action_role" }
+                    , { "$ref": "action_orgtypes" }
+                ]
+            }
+        }
+     },
+    "required": ["feature"]
+}

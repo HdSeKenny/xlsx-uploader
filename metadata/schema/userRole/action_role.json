@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "action_role",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+            , "enum": ["role"]
+        }
+        , "value": {
+            "type": "array",
+            "items": {
+                "type": "object"
+                , "properties": {
+                    "id": {
+                        "type": "integer"
+                        , "description": "the _id.value of selected user roles"
+                    },
+                    "name": {
+                        "type": "string"
+                        , "description": "the name of selected user roles"
+                    }
+                }
+            }
+        }
+        , "default": {
+            "type": "integer"
+            , "description": "the _id.value of selected user roles"
+        }
+     }
+     , "required": ["name"]
+}
