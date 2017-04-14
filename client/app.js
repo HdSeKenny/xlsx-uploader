@@ -13,16 +13,19 @@ $('.file-upload').change(() => {
 });
 
 function onUploadCsvFile(e) {
-  // e.preventDefault();
   const file = $('.file-upload')[0].files[0];
-  const formData = new FormData();
+  const form  = new FormData();
 
-  formData.append('file', file);
+  form.append('file', file);
+  // form.submit('/api/uploadCsv', (err, res) => {
+  //   // res – response object (http.IncomingMessage)  //
+  //   console.log(err, res);
+  // });
 
   $.ajax({
-    url: '/csvParser/uploadCsv',
+    url: '/api/uploadCsv',
     type: 'POST',
-    data: formData,
+    data: form,
     processData: false,
     contentType: false,
     success: (data) => {

@@ -35,13 +35,12 @@
           <h4 class="modal-title">Upload csv file</h4>
         </div>
         <div class="modal-body">
-          <form enctype="multipart/form-data">
             <input type="file" name="file" class="file-upload" />
-            <p> File: <span class="selected-file"></span></p>
-            <button type="reset" class="btn btn-default">Cancel</button>
-          </form>
             <button class="btn btn-primary choose-file-btn" onClick="chooseUploadFile()">choose a file</button>
             <button type="submit" class="btn btn-info" onClick="onUploadCsvFile()">Upload</button>
+            <p> File: <span class="selected-file"></span></p>
+            <button type="reset" class="btn btn-default">Cancel</button>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
